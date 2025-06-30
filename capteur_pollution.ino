@@ -41,14 +41,14 @@ void lireCapteur() {
   delay(1000);  // Laisser le capteur envoyer ses données
 
   int i = 0;
-  while (Serail2.available() && i < 32) {
+  while (Serial2.available() && i < 32) {
     buffer[i++] = Serial2.read();
   }
 
   if (i >= 32 && buffer[0] == 0x42 && buffer[1] == 0x4D) {  
-    uint16_t pm1_0 = (buffer[10] << 8) | buffer[11];
-    uint16_t pm2_5 = (buffer[12] << 8) | buffer[13];
-    uint16_t pm10  = (buffer[14] << 8) | buffer[15];
+    pm1_0 = (buffer[10] << 8) | buffer[11];
+    pm2_5 = (buffer[12] << 8) | buffer[13];
+    pm10  = (buffer[14] << 8) | buffer[15];
 
     Serial.print("PM1.0: ");
     Serial.print(pm1_0);
