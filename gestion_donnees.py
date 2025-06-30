@@ -20,20 +20,39 @@
 # * Aggrégation des données
 
 # %% [markdown]
-# ## Schéma de la base de donnée
+# ## Schéma de la base de donnée (Pandas)
 #
 # La base de donnée est stocké dans une dataframe intitulé data_pollution
 #
 # * Id
-# * Time (UTC)
+# * Time (datetime UTC)
 # * Latitude (° décimaux signé)
 # * Longitude (° décimaux signé)
 # * PM2.5 (µg/m³)
+#
+# ## Schéma de la base de donnée (SQL)
+# CREATE TABLE "POLLUTION" (\
+# 	"Id"	INTEGER,\
+# 	"Time"	INTEGER, -- Timestamp UNIX\
+# 	"Latitude"	REAL,\
+# 	"Longitude"	REAL,\
+# 	"PM2.5"	REAL,\
+# 	PRIMARY KEY("Id" AUTOINCREMENT),\
+# 	CHECK("Time")\
+# );
 
 # %%
 import pandas as pd
+import sqlite3
 
 # %%
-#Acquisition des données
-data_pollution = pd.read_csv("database/test.csv", sep=";", parse_dates=["Time"], date_format="%d/%m/%Y %H:%M:%S")
-#pd.to_datetime(data_pollution['Time'], format="%d/%m/%Y %H:%M:%S")
+DB_SQL = sqlite3.connect("database/pollution.sqlite")
+
+# %%
+data_pollution = pd.read_sql_query("SELECT * FROM POLLUTION", DB_SQL)
+data_pollution['Time'] = pd.to_datetime(data_pollution['Time'], unit='ms')
+
+# %%
+data_pollution.head()
+
+# %%
