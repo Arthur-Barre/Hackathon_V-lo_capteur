@@ -28,6 +28,7 @@
 # * Time (datetime UTC)
 # * Latitude (° décimaux signé)
 # * Longitude (° décimaux signé)
+# * Speed (à définir)
 # * PM2.5 (µg/m³)
 #
 # ## Schéma de la base de donnée (SQL)
@@ -36,6 +37,7 @@
 # 	"Time"	INTEGER, -- Timestamp UNIX\
 # 	"Latitude"	REAL,\
 # 	"Longitude"	REAL,\
+#     "Speed" REAL,\
 # 	"PM2.5"	REAL,\
 # 	PRIMARY KEY("Id" AUTOINCREMENT),\
 # 	CHECK("Time")\
@@ -49,10 +51,13 @@ import sqlite3
 DB_SQL = sqlite3.connect("database/pollution.sqlite")
 
 # %%
+"""Données sur la polution. Contient les colonnes suivantes :
+* Time
+* Latitude
+* Longitude
+* Speed
+* PM2.5"""
 data_pollution = pd.read_sql_query("SELECT * FROM POLLUTION", DB_SQL)
 data_pollution['Time'] = pd.to_datetime(data_pollution['Time'], unit='ms')
-
-# %%
-data_pollution.head()
 
 # %%
