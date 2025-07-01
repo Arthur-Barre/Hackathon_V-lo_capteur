@@ -1,24 +1,26 @@
+#include <SoftwareSerial>
 #include <SD.h>
 #include <SPI.h>
 
-File fichier;
+//File fichier;
 
 void setup() {
   Serial.begin(9600)
   Serial2.begin(9600, SERIAL_8N1, 16, 17);  // sur le port 2, RX 16 / TX 17
 
   
-  fichier = SD.open("/pms_data.csv", FILE_WRITE);
-  if (fichier) {
-    fichier.println("Temps,PM1.0,PM2.5,PM10"); // entête CSV
-    fichier.close();
-
+  //fichier = SD.open("/pms_data.csv", FILE_WRITE);
+  //if (fichier) {
+    //fichier.println("Temps_init,PM1.0,PM2.5,PM10"); // entête CSV
+    //fichier.close();
+  //}
+  String logCSV= "Temps_init,PM1.0,PM2.5,PM10\n"
   delay(1000)
   Serial.println("Initialisation...")
-  }
+  
 }
 
-const unsigned long INTERVALLE_MESURE = 60000; // 1 minute
+const unsigned long INTERVALLE_MESURE = 20000; // 1 minute
 unsigned long dernierTemps = 0;
 
 uint8_t buffer[32];  // tableau de 32 entrées
@@ -35,15 +37,16 @@ void loop() {
 }
 
 void lireCapteur() {
-  // Vider le buffer avant de lire
+  // Vider le buffer avant de lire sinon rempli
   while (Serial2.available()) Serial2.read();
 
-  delay(1000);  // Laisser le capteur envoyer ses données
+  delay(1000);  // Laisser le capteur envoyer ses données, il émet toutes les 1s
 
   int i = 0;
   while (Serial2.available() && i < 32) {
     buffer[i++] = Serial2.read();
   }
+
 
   if (i >= 32 && buffer[0] == 0x42 && buffer[1] == 0x4D) {  
     pm1_0 = (buffer[10] << 8) | buffer[11];
@@ -63,12 +66,13 @@ void lireCapteur() {
 }
 
 void ecrireCSV(uint16_t  pm1_0, uint16_t  pm2_5, uint16_t pm10) {
-  fichier = SD.open("/pms_data.csv", FILE_APPEND);
-  if (fichier) {
-    fichier.print(millis() / 1000); fichier.print(",");
-    fichier.print(pm1_0); fichier.print(",");
-    fichier.print(pm2_5); fichier.print(",");
-    fichier.println(pm10);
-    fichier.close();
+  //fichier = SD.open("/pms_data.csv", FILE_APPEND);
+  //if (fichier) {
+    //fichier.print(millis() / 1000); fichier.print(",");
+    //fichier.print(pm1_0); fichier.print(",");
+    //fichier.print(pm2_5); fichier.print(",");
+    //fichier.println(pm10);
+    //fichier.close();
   }
+  logCSV += String(millis() / 1000) + "," + String(pm1_0) + String(pm2_5) + "," + String(pm10) + "\n";
 }
