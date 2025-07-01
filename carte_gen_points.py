@@ -55,7 +55,5 @@ for index, row  in data_pollution.iterrows():
 # %%
 carte.save("carte_pollution.html")
 
-# %%
-display(carte)
-
-# %%
+# %% [raw]
+# display(carte)
