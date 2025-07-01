@@ -1,14 +1,15 @@
 #include <SoftwareSerial.h>
-#include <SD.h>
-#include <SPI.h>
+//#include <SD.h>
+//#include <SPI.h>
 
 //File fichier;
 String logCSV= "Temps_init,PM1.0,PM2.5,PM10\n";
+bool valid_reading = false;
 
-SoftwareSerial mySerial(D1, D2, false, 128);
+SoftwareSerial mySerial(D2, D7);//, false, 128);
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   //mySerial.begin(9600, SERIAL_8N1, 7, 8);  // sur le port 2, RX 16 / TX 17
   mySerial.begin(9600);
   
@@ -34,7 +35,7 @@ void loop() {
   if (tempsActuel - dernierTemps >= INTERVALLE_MESURE) {
     dernierTemps = tempsActuel;
     lireCapteur();
-    ecrireCSV(pm1_0,pm2_5,pm10);
+    if(valid_reading) ecrireCSV(pm1_0,pm2_5,pm10);
   }
 }
 
@@ -49,25 +50,22 @@ void lireCapteur() {
     buffer[i++] = mySerial.read();
   }
 
-  for(int t = 0;t < 32;t++){
-    Serial.print(buffer[t]);
-    Serial.print(" ");
-  }
-  Serial.println(" ");
-
   if (i >= 32 && buffer[0] == 0x42 && buffer[1] == 0x4D) {  
     pm1_0 = (buffer[10] << 8) | buffer[11];
     pm2_5 = (buffer[12] << 8) | buffer[13];
     pm10  = (buffer[14] << 8) | buffer[15];
 
-    Serial.print("PM1.0: ");
+    valid_reading = true;
+    /*Serial.print("PM1.0: ");
     Serial.print(pm1_0);
     Serial.print(" µg/m3, PM2.5: ");
     Serial.print(pm2_5);
     Serial.print(" µg/m3, PM10: ");
     Serial.print(pm10);
-    Serial.println(" µg/m3");
+    Serial.println(" µg/m3");*/
+    Serial.print(logCSV);
   } else {
+    valid_reading = false;
     Serial.println("Erreur de lecture ou trame invalide.");
   }
 }
@@ -81,5 +79,5 @@ void ecrireCSV(uint16_t  pm1_0, uint16_t  pm2_5, uint16_t pm10) {
     //fichier.println(pm10);
     //fichier.close();
   //}
-  logCSV += String(millis() / 1000) + "," + String(pm1_0) + String(pm2_5) + "," + String(pm10) + "\n";
+  logCSV += String(millis() / 1000) + "," + String(pm1_0) + "," + String(pm2_5) + "," + String(pm10) + "\n";
 }
