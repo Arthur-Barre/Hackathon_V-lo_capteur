@@ -56,7 +56,9 @@ DB_SQL = sqlite3.connect("database/pollution.sqlite")
 * Latitude
 * Longitude
 * Speed
-* PM2.5"""
+* PM1
+* PM2.5
+* PM10"""
 data_pollution = pd.read_sql_query("SELECT * FROM POLLUTION", DB_SQL)
 data_pollution['Time'] = pd.to_datetime(data_pollution['Time'], unit='ms')
 
