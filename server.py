@@ -12,6 +12,7 @@ app = FastAPI()
 FOLDER_FOR_IMPORT = "database/imported_files/"
 
 """Récupère le contenu du body de la requête POST et l'enregistre un CSV.
+Cf. import_data.py pour le format attendu.
 
 Si l'entête 'File-name' est fourni, ce sera le nom du fichier. Sinon il sera généré en fonction de l'heure."""
 @app.post("/api/1.0/upload_data_file", status_code=201)
