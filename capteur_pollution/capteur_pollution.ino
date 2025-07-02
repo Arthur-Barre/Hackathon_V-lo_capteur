@@ -21,11 +21,11 @@ void setup() {
   //mySerial.begin(9600, SERIAL_8N1, 7, 8);  // sur le port 2, RX 16 / TX 17
   mySerial.begin(9600);
   
-  //fichier = SD.open("/pms_data.csv", FILE_WRITE);
-  //if (fichier) {
-    //fichier.println("Temps_init,PM1.0,PM2.5,PM10"); // entête CSV
-    //fichier.close();
-  //}
+  fichier = SD.open("data.csv", FILE_WRITE);
+  if (fichier) {
+    fichier.println("Temps_init,PM1.0,PM2.5,PM10"); // entête CSV
+    fichier.close();
+  }
   delay(1000);
   Serial.println("Initialisation...");
   
