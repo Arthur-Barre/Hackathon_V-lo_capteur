@@ -37,25 +37,27 @@ text-align: justify;}
 
 }
 
+
 .niv1 {
-    background-color: rgb(108, 232, 116);
+    background-color: lightgreen;
 }
 
 .niv2 {
-    background-color: rgb(0, 151, 10);
+    background-color: green;
 }
 
 .niv3{
-    background-color: rgb(245, 164, 43);
+    background-color: orange;
 }
 
 .niv4 {
-    background-color: rgb(244, 78, 32);
+    background-color: red;
 }
 
 .seuils{
 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 margin-left: 60px;
+margin-right: 60px;
 margin-bottom: 20px;
 display: grid;
 grid-template-areas: "left center right";
@@ -63,13 +65,13 @@ grid-template-columns: 1fr 1fr 1fr;
 }
 
 .PM25 {
-grid-area: left;
-}
-
-.PM10 {
 grid-area: center;
 }
 
-.NO2 {
+.PM10 {
+grid-area: left;
+}
+
+.PM1 {
 grid-area: right;
 }
