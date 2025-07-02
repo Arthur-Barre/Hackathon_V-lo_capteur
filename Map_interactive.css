@@ -21,7 +21,13 @@ text-align: justify;}
     text-align: center
 }
 
-.legend {
+.legend1 {
+    display: flex;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+.legend2 {
     display: flex;
     margin-left: 60px;
     margin-right: 60px;
@@ -34,25 +40,20 @@ text-align: justify;}
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
-
 }
 
 
-.niv1 {
-    background-color: lightgreen;
-}
+.niv1 {background-color: lightgreen;}
+.niv2 {background-color: green;}
+.niv3{background-color: orange;}
+.niv4 {background-color: red;}
 
-.niv2 {
-    background-color: green;
-}
-
-.niv3{
-    background-color: orange;
-}
-
-.niv4 {
-    background-color: red;
-}
+.niva{background-color: lightblue}
+.nivb{background-color: blue}
+.nivc{
+    background-color: yellow;  
+    color: black}
+.nivd{background-color: red}
 
 .seuils{
 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
