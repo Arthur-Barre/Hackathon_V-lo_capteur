@@ -14,7 +14,12 @@ margin-left: 60px;
 p {
 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 margin-left: 60px;
-margin-right: 20px;}
+margin-right: 70px;
+text-align: justify;}
+
+.carte {
+    text-align: center
+}
 
 .legend {
     display: flex;
