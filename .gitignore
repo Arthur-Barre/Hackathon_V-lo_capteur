@@ -4,3 +4,4 @@ test/
 __pycache__/
 database/imported_files/
 carte_pollution*
+database/
