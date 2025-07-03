@@ -1,15 +1,21 @@
 from fastapi import FastAPI, Request
 from datetime import datetime, timezone
 from import_data import import_csv_to_sqlDB
+from fastapi.staticfiles import StaticFiles
 import os
 
-#pour faire tourner ce serveur, vous pouvez exécuter dans un shell system (CMD, PowerShell, GitBash, Bash, Zsh, ...)
-#uvicorn server:app
+# pour faire tourner ce serveur, vous pouvez exécuter dans un shell system (CMD, PowerShell, GitBash, Bash, Zsh, ...)
+# uvicorn server:app
 
 app = FastAPI()
 
 """Dossier dans lequel les csv sont importés"""
 FOLDER_FOR_IMPORT = "database/imported_files/"
+
+##########################
+### Serveur Web      #####
+##########################
+app.mount("/", StaticFiles(directory="www", html=True), name="index.html")
 
 """Récupère le contenu du body de la requête POST et l'enregistre un CSV.
 Cf. import_data.py pour le format attendu.
