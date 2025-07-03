@@ -3,7 +3,6 @@
 ## Dépendances :
 * pandas
 * sqlite3
-* pandas
 * numpy
 * folium
 
