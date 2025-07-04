@@ -12,10 +12,7 @@ app = FastAPI()
 """Dossier dans lequel les csv sont importés"""
 FOLDER_FOR_IMPORT = "database/imported_files/"
 
-##########################
-### Serveur Web      #####
-##########################
-app.mount("/", StaticFiles(directory="www", html=True), name="index.html")
+
 
 """Récupère le contenu du body de la requête POST et l'enregistre un CSV.
 Cf. import_data.py pour le format attendu.
@@ -47,3 +44,8 @@ async def save_the_data(request: Request):
 		print(err)
 		return "Warning. The file has been uploaded but could not be included in the database."
 	return "Success."
+
+##########################
+### Serveur Web      #####
+##########################
+app.mount("/", StaticFiles(directory="www", html=True), name="index.html")
