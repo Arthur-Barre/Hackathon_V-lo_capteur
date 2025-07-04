@@ -21,9 +21,6 @@ from folium import FeatureGroup
 from folium.plugins import HeatMap
 from gestion_donnees import data_pollution
 
-# %%
-QA=pd.read_csv("indices_QA_commune_IDF_04_2018.csv")
-
 
 # %%
 # Coordonnées centrées sur Paris
