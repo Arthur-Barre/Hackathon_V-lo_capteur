@@ -37,7 +37,7 @@ Fait tourner le script pour recréer la carte avec les nouveaux points. Peut êt
 """
 def import_csv_to_sqlDB(path_to_csv, ignore_map_update=False):
 
-    df_from_csv = pd.read_csv(path_to_csv, header=None, names=["Time", "Speed", "Latitude", "Longitude", "PM1", "PM2.5", "PM10"],
+    df_from_csv = pd.read_csv(path_to_csv, header=None, names=["Time", "Latitude", "Longitude", "Speed", "PM1", "PM2.5", "PM10"],
                             sep=',',
                             dtype={
                                 'Time':int,
@@ -60,7 +60,7 @@ def import_csv_to_sqlDB(path_to_csv, ignore_map_update=False):
     df_from_csv.to_sql("POLLUTION", SQL_DB, if_exists="append", index=False, dtype={'Time':'INTEGER'})
 
     if not ignore_map_update:
-        os.system("python3 carte_gen_points.py")
+        os.system("python3 heatmap_gen.py")
 
     
 
