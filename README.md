@@ -30,9 +30,9 @@ L'idée est la suivante : Lors d'un tour en vélo, notre système embarqué mesu
 ## circuit éléctronique
 
 
-On branche le capteur PMS7003 sur les pins 2 et 7, et le GPS sur le hardware Serial1, soit sur les pins 0 et 1. On relie le tout au module SD. 
+On branche le capteur PMS7003 sur les pins 2 et 7, et le GPS sur le hardware Serial1, soit sur les pins 0 et 1. le module SD est lui branché sur le pin 10. La carte arduino est alimentée par baterie transformé en 5 V.
 <img src="schema_elec.png.png" alt="Schéma de câblage" width="500"/>
-![Schéma de câblage](schema_elec.png.png)
+
 
 ## Map via Folium
 
