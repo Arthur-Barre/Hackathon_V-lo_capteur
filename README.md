@@ -31,6 +31,7 @@ L'idée est la suivante : Lors d'un tour en vélo, notre système embarqué mesu
 
 
 On branche le capteur PMS7003 sur les pins 2 et 7, et le GPS sur le hardware Serial1, soit sur les pins 0 et 1. On relie le tout au module SD. 
+<img src="schema_elec.png.png" alt="Schéma de câblage" width="500"/>
 ![Schéma de câblage](schema_elec.png.png)
 
 ## Map via Folium
